@@ -12,6 +12,17 @@ div {
   border-bottom: 1px solid gray;
 }
 
+h4 {
+  cursor: pointer;
+}
+
+.modal {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #eee;
+  text-align: left;
+}
+
 .black-nav {
   display: flex;
   background: black;
