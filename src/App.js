@@ -3,15 +3,12 @@ import './App.css';
 import { useState } from 'react';
 
 const App = () => {
-  // let post = '찬실은 복도 많지!';
-  // const [제목1, b1] = useState('찬실은 복도 많지');
-  // const [제목2, b2] = useState('내 서랍 속에 행복');
-  // const [제목3, b3] = useState('컴온컴온');
-
   const [제목들, 제목변경] = useState(['찬실은 복도 많지', '내 서랍 속에 행복', '컴온컴온']);
   const [like, likeAdd] = useState(0);
   const [modal, setModal] = useState(false);
-  console.log(like[0]);
+
+  // 동적 UI를 만들기 위해서는 현재 UI 상태를 state에 저장해두어야 함
+  let [title, setTitle] = useState(0); // 0이면 0번째 제목, 1이면 1번째 제목 ... 
 
   return (
     <div className="App">
@@ -30,16 +27,16 @@ const App = () => {
           copy2.sort();
           제목변경(copy2);
         }}>제목정렬</button>
-      {제목들.map((제목) => {
+      {제목들.map((e, i) => {
         return (
           <div className='list'>
-            <h4 onClick={() => {setModal(!modal)}}>{제목}</h4>
+            <h4 onClick={() => {setModal(!modal); setTitle(i)}}>{제목들[i]}</h4>
               {/* {제목} <span onClick={() => {likeAdd(like + 1)}}>👍</span> {like}</h4> */}
             <p>4월 18일</p>
           </div>
         );
       })}
-      { modal === true ? <Modal 제목변경={제목변경} color="skyblue" title1={제목들}/> : null }
+      { modal === true ? <Modal 제목변경={제목변경} color="skyblue" title1={제목들} title={title}/> : null }
     </div>
   );
 }
@@ -47,7 +44,7 @@ const App = () => {
 const Modal = (props) => {
   return (
     <div className='modal' style={{background: props.color}}>
-      <h4>{props.title1[0]}</h4>
+      <h4>{props.title1[props.title]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
       <button onClick={() => {props.제목변경(['라이프잇셀프', '벌새', '라이스보이'])}}>글 수정</button>
