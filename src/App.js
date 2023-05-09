@@ -12,6 +12,7 @@ const App = () => {
   const [like, likeAdd] = useState(0);
   const [modal, setModal] = useState(false);
   console.log(like[0]);
+
   return (
     <div className="App">
       <div className='black-nav'>
@@ -32,23 +33,24 @@ const App = () => {
       {제목들.map((제목) => {
         return (
           <div className='list'>
-            <h4 onClick={() => {setModal(!modal)}}>
-              {제목} <span onClick={() => {likeAdd(like + 1)}}>👍</span> {like}</h4>
+            <h4 onClick={() => {setModal(!modal)}}>{제목}</h4>
+              {/* {제목} <span onClick={() => {likeAdd(like + 1)}}>👍</span> {like}</h4> */}
             <p>4월 18일</p>
           </div>
         );
       })}
-      { modal === true ? <Modal/> : null }
+      { modal === true ? <Modal 제목변경={제목변경} color="skyblue" title1={제목들}/> : null }
     </div>
   );
 }
 
-const Modal = () => {
+const Modal = (props) => {
   return (
-    <div className='modal'>
-      <h4>제목</h4>
+    <div className='modal' style={{background: props.color}}>
+      <h4>{props.title1[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button onClick={() => {props.제목변경(['라이프잇셀프', '벌새', '라이스보이'])}}>글 수정</button>
   </div>
   );
 }
